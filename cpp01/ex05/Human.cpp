@@ -4,10 +4,6 @@
 
 #include "Human.h"
 
-Brain &Human::getBrain() {
-	return brain;
-}
-
 Brain * Human::identify() {
 	return brain.identify();
 }

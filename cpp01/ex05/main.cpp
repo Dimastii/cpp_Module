@@ -7,6 +7,6 @@
 int main()
 {
 	Human bob;
-	std::cout << bob.identify() << std::endl;
-	std::cout << bob.getBrain().identify() << std::endl;
+	std::cout << "0x" << bob.identify() << std::endl;
+	std::cout << "0x" << bob.getBrain().identify() << std::endl;
 };

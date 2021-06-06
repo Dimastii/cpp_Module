@@ -11,7 +11,6 @@ private:
 	Brain brain;
 public:
 	Human();
-	Brain & getBrain();
 	Brain * identify();
 };
 
