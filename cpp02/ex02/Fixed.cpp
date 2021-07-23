@@ -1,16 +1,16 @@
 #include "Fixed.hpp"
 
 Fixed::Fixed() {
-	std::cout << "Default constructor called" << std::endl;
+	//std::cout << "Default constructor called" << std::endl;
 	this->_fixed_point_value = 0;
 }
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
+	//std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& copy) {
-	std::cout << "Copy constructor called" << std::endl;
+	//std::cout << "Copy constructor called" << std::endl;
 	_fixed_point_value = copy.getRawBits();
 }
 
@@ -23,7 +23,7 @@ void Fixed::setRawBits(const int raw) {
 }
 
 Fixed& Fixed::operator = (const Fixed& fixed) {
-	std::cout << "Assignation operator called" << std::endl;
+	//std::cout << "Assignation operator called" << std::endl;
 	_fixed_point_value = fixed.getRawBits();
 	return (*this);
 }
@@ -68,6 +68,32 @@ bool Fixed::operator<(const Fixed& fixed)
 		return 0;
 }
 
+Fixed& Fixed::operator+(const Fixed& fixed)
+{
+	Fixed ret;
+	ret._fixed_point_value = this->_fixed_point_value + fixed._fixed_point_value;
+	return ret;
+}
+
+Fixed& Fixed::operator-(const Fixed& fixed)
+{
+	Fixed ret;
+	ret._fixed_point_value = this->_fixed_point_value - fixed._fixed_point_value;
+	return ret;
+}
+
+Fixed& Fixed::operator*(const Fixed& fixed)
+{
+	Fixed ret(this->toFloat() * fixed.toFloat());
+	return ret;
+}
+
+Fixed& Fixed::operator/(const Fixed& fixed)
+{
+	Fixed ret(this->toFloat() / fixed.toFloat());
+	return ret;
+}
+
 bool Fixed::operator==(const Fixed& fixed)
 {
 	if (int(this->_fixed_point_value * Fixed::_num_of_frac_bits) == int(fixed._fixed_point_value * Fixed::_num_of_frac_bits))
@@ -77,13 +103,12 @@ bool Fixed::operator==(const Fixed& fixed)
 }
 
 Fixed::Fixed(const int a) {
-	std::cout << "Int constructor called" << std::endl;
+	//std::cout << "Int constructor called" << std::endl;
 	_fixed_point_value = a << _num_of_frac_bits;
-
 }
 
 Fixed::Fixed(const float b) {
-	std::cout << "Float constructor called" << std::endl;
+	//std::cout << "Float constructor called" << std::endl;
 	_fixed_point_value = roundf(b * (1 << _num_of_frac_bits));
 }
 

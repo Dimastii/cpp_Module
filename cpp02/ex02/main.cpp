@@ -3,14 +3,19 @@
 
 int main(void) {
 	Fixed a;
-	Fixed const b(10);
-	Fixed const c(42.42f);
-	Fixed const d(b);
-	a = Fixed(42.40f);
+	
+	
+	Fixed b(Fixed(5.05f) / Fixed(2) /** Fixed(2)*/);
+	std::cout << b * Fixed(2) << std::endl;
+	Fixed c(2);
+	//std::cout << b - c << std::endl;
+	std::cout << 5.05f / 2 * 2 << std::endl;
 
-	bool q = a >= c;
-
-	//std::cout << q << "|";
-
+	//std::cout << ++a << std::endl;
+	//std::cout << a << std::endl;
+	//std::cout << a++ << std::endl;
+	//std::cout << a << std::endl;
+	//std::cout << b << std::endl;
+	//std::cout << Fixed::max(a, b) << std::endl;
 	return 0;
 }
