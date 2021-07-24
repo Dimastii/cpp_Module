@@ -6,7 +6,7 @@ Fixed::Fixed() {
 }
 
 Fixed::~Fixed() {
-	//std::cout << "Destructor called" << std::endl;
+//	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& copy) {
@@ -30,7 +30,7 @@ Fixed& Fixed::operator = (const Fixed& fixed) {
 
 bool Fixed::operator>=(const Fixed& fixed)
 {
-	if (int(this->_fixed_point_value * Fixed::_num_of_frac_bits) >= int(fixed._fixed_point_value * Fixed::_num_of_frac_bits))
+	if (int(this->_fixed_point_value) >= int(fixed._fixed_point_value))
 		return 1;
 	else
 		return 0;
@@ -38,7 +38,7 @@ bool Fixed::operator>=(const Fixed& fixed)
 
 bool Fixed::operator<=(const Fixed& fixed)
 {
-	if (int(this->_fixed_point_value * Fixed::_num_of_frac_bits) <= int(fixed._fixed_point_value * Fixed::_num_of_frac_bits))
+	if (int(this->_fixed_point_value) <= int(fixed._fixed_point_value))
 		return 1;
 	else
 		return 0;
@@ -46,7 +46,7 @@ bool Fixed::operator<=(const Fixed& fixed)
 
 bool Fixed::operator!=(const Fixed& fixed)
 {
-	if (int(this->_fixed_point_value * Fixed::_num_of_frac_bits) != int(fixed._fixed_point_value * Fixed::_num_of_frac_bits))
+	if (int(this->_fixed_point_value) != int(fixed._fixed_point_value))
 		return 1;
 	else
 		return 0;
@@ -54,7 +54,7 @@ bool Fixed::operator!=(const Fixed& fixed)
 
 bool Fixed::operator>(const Fixed& fixed)
 {
-	if (int(this->_fixed_point_value * Fixed::_num_of_frac_bits) > int(fixed._fixed_point_value * Fixed::_num_of_frac_bits))
+	if (int(this->_fixed_point_value) > int(fixed._fixed_point_value))
 		return 1;
 	else
 		return 0;
@@ -62,7 +62,7 @@ bool Fixed::operator>(const Fixed& fixed)
 
 bool Fixed::operator<(const Fixed& fixed)
 {
-	if (int(this->_fixed_point_value * Fixed::_num_of_frac_bits) < int(fixed._fixed_point_value * Fixed::_num_of_frac_bits))
+	if (int(this->_fixed_point_value) < int(fixed._fixed_point_value))
 		return 1;
 	else
 		return 0;
@@ -70,36 +70,62 @@ bool Fixed::operator<(const Fixed& fixed)
 
 Fixed& Fixed::operator+(const Fixed& fixed)
 {
-	Fixed ret;
-	ret._fixed_point_value = this->_fixed_point_value + fixed._fixed_point_value;
-	return ret;
+	Fixed *ret = new Fixed();
+	ret->_fixed_point_value = this->_fixed_point_value + fixed._fixed_point_value;
+	return *ret;
 }
 
 Fixed& Fixed::operator-(const Fixed& fixed)
 {
-	Fixed ret;
-	ret._fixed_point_value = this->_fixed_point_value - fixed._fixed_point_value;
-	return ret;
+	Fixed *ret = new Fixed();
+	ret->_fixed_point_value = this->_fixed_point_value - fixed._fixed_point_value;
+	return *ret;
 }
 
 Fixed& Fixed::operator*(const Fixed& fixed)
 {
-	Fixed ret(this->toFloat() * fixed.toFloat());
-	return ret;
+	Fixed *ret = new Fixed(this->toFloat() * fixed.toFloat());
+	return *ret;
 }
 
 Fixed& Fixed::operator/(const Fixed& fixed)
 {
-	Fixed ret(this->toFloat() / fixed.toFloat());
-	return ret;
+	Fixed *ret = new Fixed(this->toFloat() / fixed.toFloat());
+	return *ret;
 }
 
 bool Fixed::operator==(const Fixed& fixed)
 {
-	if (int(this->_fixed_point_value * Fixed::_num_of_frac_bits) == int(fixed._fixed_point_value * Fixed::_num_of_frac_bits))
+	if (int(this->_fixed_point_value) == int(fixed._fixed_point_value))
 		return 1;
 	else
 		return 0;
+}
+
+Fixed& Fixed::operator++()
+{
+	this->_fixed_point_value++;
+	return *this;
+}
+
+Fixed& Fixed::operator--()
+{
+	this->_fixed_point_value--;
+	return *this;
+}
+
+Fixed& Fixed::operator++(int)
+{
+	Fixed *tmp = new Fixed(*this);
+	++(*this);
+	return *tmp;
+}
+
+Fixed& Fixed::operator--(int)
+{
+	Fixed *tmp = new Fixed(*this);
+	--(*this);
+	return *tmp;
 }
 
 Fixed::Fixed(const int a) {
@@ -123,4 +149,18 @@ float Fixed::toFloat() const {
 std::ostream& operator << (std::ostream& out, const Fixed& reference) {
 	out << reference.toFloat();
 	return (out);
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b){
+	if (a > b)
+		return a;
+	else
+		return b;
+}
+
+Fixed& Fixed::max(const Fixed& a, const Fixed& b){
+	if ((Fixed&)a > (Fixed&)b)
+		return (Fixed&)a;
+	else
+		return (Fixed&)b;
 }

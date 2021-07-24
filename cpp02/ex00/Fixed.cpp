@@ -1,4 +1,3 @@
-#pragma once
 #include "Fixed.hpp"
 
 Fixed::Fixed() : _fixedPointValue(0) {

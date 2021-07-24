@@ -14,7 +14,8 @@ public:
 
 	float	toFloat() const;
 	int		toInt() const;
-	Fixed& operator= (const Fixed& fixed);
+
+	Fixed& operator=(const Fixed& fixed);
 
 	bool operator>=(const Fixed& fixed);
 	bool operator<=(const Fixed& fixed);
@@ -28,10 +29,19 @@ public:
 	Fixed& operator*(const Fixed& fixed);
 	Fixed& operator/(const Fixed& fixed);
 
+	Fixed& operator++();
+	Fixed& operator--();
+
+	Fixed& operator++(int);
+	Fixed& operator--(int);
 
 
 	int		getRawBits() const;
 	void	setRawBits(int raw);
+
+	static Fixed& max(const Fixed& a, const Fixed& b);
+	static Fixed& max(Fixed& a, Fixed& b);
+
 };
 
 std::ostream& operator<< (std::ostream& out, const Fixed& reference);
