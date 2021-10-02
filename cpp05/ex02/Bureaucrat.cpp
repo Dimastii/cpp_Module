@@ -52,3 +52,16 @@ std::ostream& operator<<(std::ostream& out, Bureaucrat b)
     out << b.getName() << ", grade : " << b.getGrade() << std::endl;
     return out;
 }
+
+void Bureaucrat::signForm(Form &form) {
+	form.beSigned(*this);
+	if (form.getSigned())
+		std::cout << form.getName() << " form has been signed" << std::endl;
+	else
+		std::cout << form.getName() << " hasn't been signed because grade is too low" << std::endl;
+}
+
+void Bureaucrat::executeForm(Form &form) {
+	form.execute(*this);
+	std::cout << name << " executes " << form.getName() << std::endl;
+}

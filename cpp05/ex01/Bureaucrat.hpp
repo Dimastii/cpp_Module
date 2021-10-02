@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CPP_BUREAUCRAT_HPP
+#define CPP_BUREAUCRAT_HPP
 #include <iostream>
 
 class Bureaucrat
@@ -28,3 +29,5 @@ public:
 };
 
 std::ostream& operator<< (std::ostream& out,  Bureaucrat b);
+
+#endif

@@ -2,6 +2,10 @@
 #define CPP_BUREAUCRAT_HPP
 #include <iostream>
 
+class Form;
+
+#include "Form.hpp"
+
 class Bureaucrat
 {
 private:
@@ -16,6 +20,9 @@ public:
 
     int             getGrade();
     std::string     getName();
+
+    void 			signForm(Form &form);
+    void 			executeForm(Form &form);
 
     class GradeToLowException : public std::exception {
     public:

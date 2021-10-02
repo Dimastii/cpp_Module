@@ -1,4 +1,3 @@
-#pragma once
 #include "Bureaucrat.hpp"
 
 int main()

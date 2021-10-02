@@ -39,6 +39,7 @@ int Bureaucrat::getGrade()
     {
         return grade;
     }
+	return 0;
 }
 
 std::string Bureaucrat::getName()

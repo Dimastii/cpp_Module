@@ -1,4 +1,3 @@
-#pragma once
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
@@ -9,6 +8,8 @@ int main()
         Bureaucrat	bureaucrat_2("Loh", 150);
         Form* a = new Form("NDFL", 100);
         a->beSigned(bureaucrat_2);
+        std::cout << *a << std::endl;
+        std::cout << bureaucrat_2;
     }
     catch (std::exception& e)
     {

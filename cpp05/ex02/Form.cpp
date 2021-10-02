@@ -3,10 +3,10 @@
 Form::Form(std::string name, int grade, int grade_to_execute): is_signed(false)
 {
     if (grade > 150) {
-        throw Form::GradeToLowException();
+        throw Form::GradeTooLowException();
     }
     else if (grade < 1) {
-        throw Form::GradeToHightException();
+    	throw Form::GradeTooHighException();
     }
     this->grade = grade;
     this->name = name;
@@ -39,13 +39,18 @@ void Form::beSigned(Bureaucrat b)
     }
     else
     {
-        throw Form::GradeToLowException();
+        throw Form::GradeTooLowException();
     }
 }
 
 bool Form::getSigned()
 {
 	return is_signed;
+}
+
+int Form::getGradeToExec()
+{
+	return grade_to_execute;
 }
 
 std::ostream& operator<<(std::ostream& out, Form &b)
@@ -58,4 +63,11 @@ std::ostream& operator<<(std::ostream& out, Form &b)
 
 	out << b.getName() << ", grade : " << b.getGrade() << " " + sign << std::endl;
 	return out;
+}
+
+void Form::execute(Bureaucrat &executor){
+	if (!getSigned())
+		throw (NotSignedException());
+	if (executor.getGrade() > grade_to_execute)
+		throw (ExecuteException());
 }
